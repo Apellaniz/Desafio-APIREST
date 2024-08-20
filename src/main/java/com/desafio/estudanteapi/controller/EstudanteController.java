@@ -3,6 +3,8 @@ package com.desafio.estudanteapi.controller;
 import com.desafio.estudanteapi.model.Estudante;
 import com.desafio.estudanteapi.service.EstudanteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -28,7 +30,7 @@ public class EstudanteController {
             @ApiResponse(responseCode = "201", description = "Estudante criado com sucesso!"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos!")
     })
-    @Operation(summary = "Criar um novo estudante")
+    @Operation(summary = "Criar um novo estudante", description = "Operação responsável pela criação do usuário.")
     public ResponseEntity<Estudante> criarEstudante(@RequestBody Estudante estudante) {
         Estudante novoEstudante = estudanteService.criarEstudante(estudante);
         return new ResponseEntity<>(novoEstudante, HttpStatus.CREATED);
@@ -39,7 +41,7 @@ public class EstudanteController {
             @ApiResponse(responseCode = "200", description = "Estudante encontrado!"),
             @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
-    @Operation(summary = "Buscar um estudante pelo ID")
+    @Operation(summary = "Buscar um estudante pelo ID", description = "Operação responsável por buscar um estudante pelo ID.")
     public ResponseEntity<Estudante> buscarEstudantePorId(@PathVariable UUID id) {
         Optional<Estudante> estudante = estudanteService.buscarEstudantePorId(id);
         return estudante.map(ResponseEntity::ok)
@@ -50,7 +52,7 @@ public class EstudanteController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de estudantes obtida com sucesso!")
     })
-    @Operation(summary = "Listar todos os estudantes")
+    @Operation(summary = "Listar todos os estudantes", description = "Operação responsável por listar todos os estudantes.")
     public List<Estudante> listarTodosEstudantes() {
         return estudanteService.listarTodosEstudantes();
     }
@@ -60,7 +62,7 @@ public class EstudanteController {
             @ApiResponse(responseCode = "200", description = "Estudante atualizado com sucesso!"),
             @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
-    @Operation(summary = "Atualizar as informações de um estudante")
+    @Operation(summary = "Atualizar as informações de um estudante", description = "Operação responsável por atualizar os dados de um estudante.")
     public ResponseEntity<Estudante> atualizarEstudante(@PathVariable UUID id, @RequestBody Estudante estudante) {
         try {
             Estudante estudanteAtualizado = estudanteService.atualizarEstudante(id, estudante);
@@ -75,7 +77,7 @@ public class EstudanteController {
             @ApiResponse(responseCode = "204", description = "Estudante removido com sucesso!"),
             @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
-    @Operation(summary = "Remover um estudante pelo ID")
+    @Operation(summary = "Remover um estudante pelo ID", description = "Operação responsável por excluir um estudante pelo ID.")
     public ResponseEntity<Void> deletarEstudante(@PathVariable UUID id) {
         estudanteService.deletarEstudante(id);
         return ResponseEntity.noContent().build();

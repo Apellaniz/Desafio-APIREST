@@ -1,10 +1,12 @@
 package com.desafio.estudanteapi.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -15,6 +17,7 @@ public class Estudante {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private UUID id;
 
     private String nome;
@@ -24,14 +27,6 @@ public class Estudante {
     private LocalDate dataNascimento;
 
     private String matricula;
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getNome() {
         return nome;
