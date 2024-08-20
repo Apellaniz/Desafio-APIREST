@@ -25,8 +25,8 @@ public class EstudanteController {
 
     @PostMapping
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudante Criado!"),
-            @ApiResponse(responseCode = "400", description = "Erro ao criar estudante!")
+            @ApiResponse(responseCode = "201", description = "Estudante criado com sucesso!"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos fornecidos!")
     })
     @Operation(summary = "Criar um novo estudante")
     public ResponseEntity<Estudante> criarEstudante(@RequestBody Estudante estudante) {
@@ -36,8 +36,8 @@ public class EstudanteController {
 
     @GetMapping("/{id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudante buscado pelo ID!"),
-            @ApiResponse(responseCode = "400", description = "Erro ao encontrar estudante pelo ID!")
+            @ApiResponse(responseCode = "200", description = "Estudante encontrado!"),
+            @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
     @Operation(summary = "Buscar um estudante pelo ID")
     public ResponseEntity<Estudante> buscarEstudantePorId(@PathVariable UUID id) {
@@ -48,8 +48,7 @@ public class EstudanteController {
 
     @GetMapping
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Todos os estudantes listados!"),
-            @ApiResponse(responseCode = "400", description = "Erro ao listar todos os estudantes!")
+            @ApiResponse(responseCode = "200", description = "Lista de estudantes obtida com sucesso!")
     })
     @Operation(summary = "Listar todos os estudantes")
     public List<Estudante> listarTodosEstudantes() {
@@ -58,8 +57,8 @@ public class EstudanteController {
 
     @PutMapping("/{id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Informação do estudante atualziada!"),
-            @ApiResponse(responseCode = "400", description = "Erro ao atualizar informações do estudante!")
+            @ApiResponse(responseCode = "200", description = "Estudante atualizado com sucesso!"),
+            @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
     @Operation(summary = "Atualizar as informações de um estudante")
     public ResponseEntity<Estudante> atualizarEstudante(@PathVariable UUID id, @RequestBody Estudante estudante) {
@@ -73,8 +72,8 @@ public class EstudanteController {
 
     @DeleteMapping("/{id}")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Estudante removido por ID!"),
-            @ApiResponse(responseCode = "400", description = "Erro ao remover estudante pelo ID!")
+            @ApiResponse(responseCode = "204", description = "Estudante removido com sucesso!"),
+            @ApiResponse(responseCode = "404", description = "Estudante não encontrado!")
     })
     @Operation(summary = "Remover um estudante pelo ID")
     public ResponseEntity<Void> deletarEstudante(@PathVariable UUID id) {
